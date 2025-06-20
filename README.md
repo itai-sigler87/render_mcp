@@ -10,7 +10,8 @@ At the end I'll also show you how to connect this up to the Claude web UI and Op
 
 Once you have your MCP server deployed on Render.com you can skip to the section called 😀Chat with Your MCP Server😀
 
-image.png
+![image](https://github.com/user-attachments/assets/ed77afdc-3be5-40db-87b6-9dfb78ef3058)
+
 
 Connect with Me 👋
 If you like this notebook or in any way found it helpful, feel free to connect with me on LinkedIn here:
