@@ -13,24 +13,27 @@ At the end I'll also show you how to connect this up to the **Claude web UI** an
 
 [https://colab.research.google.com/github/smartaces/render_mcp/blob/main/How_To_Set_Up_A_Remote_MCP_Client_Server_on_Render_For_Anthropic_and_OpenAI_Agents.ipynb](https://github.com/smartaces/render_mcp/blob/main/How_To_Set_Up_A_Remote_MCP_Client_Server_on_Render_For_Anthropic_and_OpenAI_Agents.ipynb)
 
+**Watch a video of the server connected to the Claude web UI:**
+[https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=NexhEJ0OcfA)
+
+**Watch a video of the server connected to the OpenAI Playground:** 
+[https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=CIM5vs8MGFY)
+
+
 ---
 
 ![image](https://github.com/user-attachments/assets/ed77afdc-3be5-40db-87b6-9dfb78ef3058)
 
-#**Connect with Me** 👋
+**Connect with Me** 👋
 
 If you like this notebook or in any way found it helpful, feel free to connect with me on LinkedIn here:
 
 https://www.linkedin.com/in/jamesbentleyai/
 
-**Watch a video of the server connected to the Claude web UI:** [https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=NexhEJ0OcfA)
-
-**Watch a video of the server connected to the OpenAI Playground:** [https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=CIM5vs8MGFY)
-
 ---
 
 ---
-## What is MCP?
+**What is MCP?**
 
 [MCP (Model Context Protocol)](https://modelcontextprotocol.io/introduction) is an open standard developed by Anthropic to connect AI models to external tools, data sources, and workflows.
 
