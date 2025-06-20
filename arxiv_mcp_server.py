@@ -94,10 +94,14 @@ def search_papers(
     }
     field_prefix = field_mapping.get(search_field.lower(), "all")
     
+    # FIXED: Proper query construction for arXiv API
     if field_prefix != "all":
+        # For specific fields, keep the prefix
         search_query_parts.append(f"{field_prefix}:{query}")
     else:
-        search_query_parts.append(f"all:{query}")
+        # For "all" fields, omit the prefix for multi-word queries
+        # This fixes the HTTP 400 error with queries like "all:swarm agents artificial intelligence"
+        search_query_parts.append(query)
     
     # Add author search if specified
     if author_search:
