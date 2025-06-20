@@ -21,8 +21,11 @@ At the end I'll also show you how to connect this up to the **Claude web UI** an
 
 ---
 
-**⭐ Please star this repo if it has been helpful to you... just a little bit of positive feedback is incredibly motivating to me!⭐**
+**⭐ Please star this repo if it has been helpful to you:⭐**
 
+https://github.com/smartaces/render_mcp
+
+Just a little bit of positive feedback is incredibly motivating to me!
 ---
 
 ![image](https://github.com/user-attachments/assets/ed77afdc-3be5-40db-87b6-9dfb78ef3058)
