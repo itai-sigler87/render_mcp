@@ -9,6 +9,8 @@ Unlike most MCP examples - which focus on running a server on your own computer 
 
 At the end I'll also show you how to connect this up to the **Claude web UI** and **OpenAI playground**.
 
+LINK TO THE COLAB: https://colab.research.google.com/github/smartaces/render_mcp/blob/main/How_To_Set_Up_A_Remote_MCP_Client_Server_on_Render_For_Anthropic_and_OpenAI_Agents.ipynb
+
 ---
 
 ![image](https://github.com/user-attachments/assets/ed77afdc-3be5-40db-87b6-9dfb78ef3058)
