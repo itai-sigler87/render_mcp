@@ -19,6 +19,7 @@ At the end I'll also show you how to connect this up to the **Claude web UI** an
 **Watch a video of the server connected to the OpenAI Playground:** 
 [https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=CIM5vs8MGFY)
 
+**⭐ Please star this repo if it has been helpful to you... just a little bit of positive feedback is incredibly motivating to me!⭐**
 
 ---
 
