@@ -23,6 +23,10 @@ If you like this notebook or in any way found it helpful, feel free to connect w
 
 https://www.linkedin.com/in/jamesbentleyai/
 
+**Watch a video of the server connected to the Claude web UI:** [https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=NexhEJ0OcfA)
+
+**Watch a video of the server connected to the OpenAI Playground:** [https://www.youtube.com/watch?v=NexhEJ0OcfA](https://www.youtube.com/watch?v=CIM5vs8MGFY)
+
 ---
 
 ---
