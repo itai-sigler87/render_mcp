@@ -283,4 +283,4 @@ if __name__ == "__main__":
     # Initialize and run the server
     print(f"Starting Weather MCP server on 0.0.0.0:{PORT}")
     # Run with SSE transport (host and port already set in constructor)
-    mcp.run(transport='sse')
+    mcp.run()
