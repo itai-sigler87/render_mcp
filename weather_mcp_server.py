@@ -283,5 +283,5 @@ if __name__ == "__main__":
     # This block runs when you execute `python weather_mcp_server.py`
     print(f"Starting Weather MCP server on 0.0.0.0:{PORT}")
 
-    # Explicitly tell .run() which host and port to use, which fixes the Render port detection issue
-    mcp.run(host="0.0.0.0", port=PORT)
+    # The .run() method uses the host and port defined when the mcp object was created
+    mcp.run()
