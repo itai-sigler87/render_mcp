@@ -1,16 +1,29 @@
-import requests
-import json
 import os
+import json
+import requests
 from typing import List, Dict
+from fastapi import FastAPI
 from mcp.server.fastmcp import FastMCP
+
+# #############################################################################
+# This is the new, standard way to create the app object for deployment
+# #############################################################################
+app = FastAPI()
+# #############################################################################
 
 WEATHER_DIR = "weather"
 
 # Get port from environment variable (Render sets this, defaults to 8001 for local dev)
 PORT = int(os.environ.get("PORT", 8001))
 
-# Initialize FastMCP server with host and port in constructor
-mcp = FastMCP("weather", host="0.0.0.0", port=PORT)
+# Initialize FastMCP server
+# We no longer pass host/port here as Uvicorn will handle it
+mcp = FastMCP("weather")
+
+# Mount the MCP server onto the main FastAPI app
+# This makes it accessible to Uvicorn
+app.mount("/", mcp)
+
 
 @mcp.tool()
 def get_current_weather(location: str) -> str:
@@ -168,120 +181,5 @@ def save_weather_data(location: str, weather_info: Dict) -> None:
     except Exception as e:
         print(f"Error saving weather data: {str(e)}")
 
-@mcp.resource("weather://locations")
-def get_saved_locations() -> str:
-    """
-    List all locations with saved weather data.
-
-    This resource provides a simple list of all locations with weather history.
-    """
-    try:
-        if not os.path.exists(WEATHER_DIR):
-            return "# No Weather Data\n\nNo weather data has been saved yet."
-        
-        locations = set()
-        
-        for filename in os.listdir(WEATHER_DIR):
-            if filename.endswith('.json'):
-                # Extract location from filename
-                location_part = filename.split('_')[0]
-                locations.add(location_part.replace("_", " ").title())
-        
-        content = "# Saved Weather Locations\n\n"
-        if locations:
-            for location in sorted(locations):
-                content += f"- {location}\n"
-            content += f"\nTotal locations: {len(locations)}\n"
-        else:
-            content += "No locations found.\n"
-        
-        return content
-        
-    except Exception as e:
-        return f"# Error\n\nError reading weather locations: {str(e)}"
-
-@mcp.resource("weather://{location}")
-def get_location_weather_history(location: str) -> str:
-    """
-    Get detailed weather history for a specific location.
-
-    Args:
-        location: The location to retrieve weather history for
-    """
-    try:
-        if not os.path.exists(WEATHER_DIR):
-            return f"# No Weather Data for {location.title()}\n\nNo weather data found."
-        
-        location_clean = location.lower().replace(" ", "_")
-        weather_files = []
-        
-        for filename in os.listdir(WEATHER_DIR):
-            if filename.startswith(location_clean) and filename.endswith('.json'):
-                filepath = os.path.join(WEATHER_DIR, filename)
-                try:
-                    with open(filepath, 'r') as f:
-                        data = json.load(f)
-                    weather_files.append((filename, data))
-                except:
-                    continue
-        
-        if not weather_files:
-            return f"# No Weather Data for {location.title()}\n\nNo weather history found for this location."
-        
-        # Sort by filename (which includes timestamp)
-        weather_files.sort(key=lambda x: x[0], reverse=True)
-        
-        content = f"# Weather History for {location.title()}\n\n"
-        content += f"Total records: {len(weather_files)}\n\n"
-        
-        for filename, data in weather_files[:5]:  # Show last 5 records
-            content += f"## {data.get('saved_at', 'Unknown time')}\n"
-            
-            if 'forecast' in data:
-                content += f"**Forecast Data**\n"
-                content += f"- Days: {data.get('forecast_days', 'N/A')}\n"
-                for forecast in data.get('forecast', [])[:2]:  # Show first 2 days
-                    content += f"- {forecast.get('date', 'N/A')}: {forecast.get('max_temp_c', 'N/A')}°C / {forecast.get('condition', 'N/A')}\n"
-            else:
-                content += f"**Current Weather**\n"
-                content += f"- Temperature: {data.get('temperature_c', 'N/A')}°C / {data.get('temperature_f', 'N/A')}°F\n"
-                content += f"- Condition: {data.get('condition', 'N/A')}\n"
-                content += f"- Humidity: {data.get('humidity', 'N/A')}%\n"
-                content += f"- Wind: {data.get('wind_speed_kmh', 'N/A')} km/h {data.get('wind_direction', 'N/A')}\n"
-            
-            content += "\n---\n\n"
-        
-        return content
-        
-    except Exception as e:
-        return f"# Error\n\nError reading weather history for {location}: {str(e)}"
-
-@mcp.prompt()
-def generate_weather_prompt(location: str, forecast_days: int = 3) -> str:
-    """Generate a prompt for getting comprehensive weather information for a location."""
-    return f"""Get comprehensive weather information for '{location}' using the weather tools.
-
-    Follow these instructions:
-    1. First, get current weather using get_current_weather(location='{location}')
-    2. Then, get the forecast using get_weather_forecast(location='{location}', days={forecast_days})
-    3. Check if there's any weather history using get_weather_history(location='{location}')
-
-    4. Provide a comprehensive weather report that includes:
-       - Current weather conditions with temperature, humidity, wind
-       - Weather forecast for the next {forecast_days} days
-       - Any notable weather patterns or recommendations
-       - Comparison with recent historical data if available
-
-    5. Format your response in a clear, readable format with sections for:
-       - Current Conditions
-       - {forecast_days}-Day Forecast
-       - Weather Summary & Recommendations
-
-    Present the information in a way that's useful for planning activities or travel."""
-
-if __name__ == "__main__":
-    # This block runs when you execute `python weather_mcp_server.py`
-    print(f"Starting Weather MCP server on 0.0.0.0:{PORT}")
-
-    # The .run() method uses the host and port defined when the mcp object was created
-    mcp.run()
+# NOTE: We no longer need the if __name__ == "__main__" block
+# Uvicorn will run the 'app' object directly
