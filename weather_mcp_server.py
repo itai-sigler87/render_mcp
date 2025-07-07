@@ -280,7 +280,8 @@ def generate_weather_prompt(location: str, forecast_days: int = 3) -> str:
     Present the information in a way that's useful for planning activities or travel."""
 
 if __name__ == "__main__":
-    # Initialize and run the server
+    # This block runs when you execute `python weather_mcp_server.py`
     print(f"Starting Weather MCP server on 0.0.0.0:{PORT}")
-    # Run with SSE transport (host and port already set in constructor)
-    mcp.run()
+
+    # Explicitly tell .run() which host and port to use, which fixes the Render port detection issue
+    mcp.run(host="0.0.0.0", port=PORT)
